@@ -15,4 +15,5 @@ AllCops:
     - 'config/locales/*'
     - 'config/spring.rb'
     - 'db/**/*'
+    - 'spec/spec_helper.rb'
     - 'vendor/**/*'
