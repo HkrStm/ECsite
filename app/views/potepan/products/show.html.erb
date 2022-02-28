@@ -1,26 +1,8 @@
 <% provide(:title, @product.name) %>
 
 <div class="main-wrapper">
-  <!-- LIGHT SECTION -->
-  <section class="lightSection clearfix pageHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="page-title">
-            <h2>Single Product</h2>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <ol class="breadcrumb pull-right">
-            <li>
-              <%= link_to "Home", potepan_path %>
-            </li>
-            <li class="active">Single Product</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
+
+  <%= render partial: 'shared/light_section' %>
 
   <!-- MAIN CONTENT SECTION -->
   <section class="mainContent clearfix">
