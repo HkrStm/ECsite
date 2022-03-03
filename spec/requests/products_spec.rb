@@ -9,7 +9,6 @@ RSpec.describe "Products", type: :request do
     end
 
     it "リクエストが成功すること" do
-      expect(response).to be_successful
       expect(response).to have_http_status(200)
     end
 
