@@ -9,9 +9,12 @@
       </div>
       <div class="col-xs-6">
         <ol class="breadcrumb pull-right">
-          <li>
-            <%= link_to "Home", potepan_path %>
-          </li>
+          <li><%= link_to "Home", potepan_path %></li>
+          <% if current_page?(controller: 'categories', action: 'show') %>
+            <li>
+                <a href="#">shop</a>
+            </li>
+          <% end %>
           <li class="active"><%= content_title %></li>
         </ol>
       </div>
