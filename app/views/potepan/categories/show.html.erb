@@ -5,9 +5,9 @@
   <section class="mainContent clearfix productsContent">
     <div class="container">
       <div class="row">
-        <%= render 'categories_sidebar' %>
+        <%= render 'sidebar', categories: @taxonomies %>
         <div class="col-md-9 col-sm-8 col-xs-12">
-          <%= render 'shared/filter_area' %>
+          <%= render 'filter_area' %>
           <div class="row">
             <div class="col-sm-4 col-xs-12">
               <div class="productBox">
