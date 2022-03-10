@@ -9,19 +9,7 @@
         <div class="col-md-9 col-sm-8 col-xs-12">
           <%= render 'filter_area' %>
           <div class="row">
-            <div class="col-sm-4 col-xs-12">
-              <div class="productBox">
-                <div class="productImage clearfix">
-                  <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
-                </div>
-                <div class="productCaption clearfix">
-                  <a href="single_product.html">
-                    <h5>Nike Sportswear</h5>
-                  </a>
-                  <h3>199円</h3>
-                </div>
-              </div>
-            </div>
+            <%= render partial: 'product_box', collection: @taxon_products, as: 'product' %>
           </div>
         </div>
       </div>
