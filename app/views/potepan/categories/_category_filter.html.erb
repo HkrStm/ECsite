@@ -6,10 +6,10 @@
   <ul id="category-<%= category_parent.id %>" class="collapse collapseItem">
     <% category_parent.root.leaves.each do |category_child| %>
       <li>
-        <a href="<%= potepan_category_path(category_child.id) %>">
+        <%= link_to(potepan_category_path(category_child.id)) do %>
           <i class="fa fa-caret-right" aria-hidden="true"></i>
           <%= category_child.name %> <span>(<%= category_child.products.size %>)</span>
-        </a>
+        <% end %>
       </li>
     <% end %>
   </ul>
