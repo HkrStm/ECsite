@@ -11,9 +11,7 @@
         <ol class="breadcrumb pull-right">
           <li><%= link_to "Home", potepan_path %></li>
           <% if current_page?(controller: 'categories', action: 'show') %>
-            <li>
-                <a href="#">shop</a>
-            </li>
+            <li><%= link_to "shop", "#" %></li>
           <% end %>
           <li class="active"><%= content_title %></li>
         </ol>
