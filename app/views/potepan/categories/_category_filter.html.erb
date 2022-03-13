@@ -8,7 +8,7 @@
       <li>
         <%= link_to(potepan_category_path(category_child.id)) do %>
           <i class="fa fa-caret-right" aria-hidden="true"></i>
-          <%= category_child.name %> <span>(<%= category_child.products.size %>)</span>
+          <%= category_child.name %> <span>(<%= category_child.products.count %>)</span>
         <% end %>
       </li>
     <% end %>
