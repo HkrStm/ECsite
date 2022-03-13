@@ -28,6 +28,11 @@ RSpec.describe "Categories", type: :system do
     expect(current_path).to eq potepan_category_path(other_taxon.id)
   end
 
+  scenario "商品のリンクをクリックすると商品詳細ページへ移動する" do
+    click_on product.name
+    expect(current_path).to eq potepan_product_path(product.id)
+  end
+
   it "カテゴリーの商品が表示されること" do
     expect(page).to have_content product.name
     expect(page).to have_content product.display_price

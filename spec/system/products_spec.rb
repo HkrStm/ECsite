@@ -11,7 +11,7 @@ RSpec.describe "Products", type: :system do
 
   scenario "商品詳細ページからカテゴリー一覧へ移動する" do
     visit potepan_product_path(product.id)
-    click_link "一覧ページへ戻る"
+    click_on "一覧ページへ戻る"
     expect(current_path).to eq potepan_category_path(product.taxons.first.id)
   end
 end
