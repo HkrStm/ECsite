@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Categories", type: :system do
+RSpec.describe "Categories", type: :system do
   let(:taxonomy) { create(:taxonomy) }
   let(:root) { taxonomy.root }
   let(:taxon) { create(:taxon, taxonomy: taxonomy, parent: root, name: "taxon") }
