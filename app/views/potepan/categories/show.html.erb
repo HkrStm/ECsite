@@ -1,0 +1,19 @@
+<% provide(:title, @taxon.name) %>
+<div class="main-wrapper">
+  <%= render 'shared/light_section', content_title: @taxon.name %>
+  <!-- MAIN CONTENT SECTION -->
+  <section class="mainContent clearfix productsContent">
+    <div class="container">
+      <div class="row">
+        <%= render 'sidebar', categories: @taxonomies %>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <%= render 'filter_area' %>
+          <div class="row">
+            <%= render partial: 'product_box', collection: @taxon_products, as: 'product' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%= render 'shared/brand_logo_section' %>
+</div>

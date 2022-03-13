@@ -1,0 +1,16 @@
+<li>
+  <a href="javascript:;" data-toggle="collapse" data-target="#category-<%= category_parent.id %>">
+    <%= category_parent.name %>
+    <i class="fa fa-plus"></i>
+  </a>
+  <ul id="category-<%= category_parent.id %>" class="collapse collapseItem">
+    <% category_parent.root.leaves.each do |category_child| %>
+      <li>
+        <%= link_to(potepan_category_path(category_child.id)) do %>
+          <i class="fa fa-caret-right" aria-hidden="true"></i>
+          <%= category_child.name %> <span>(<%= category_child.products.count %>)</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>
