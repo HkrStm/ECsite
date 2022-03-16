@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "Categories", type: :request do
   describe "#show" do
     let(:taxonomy) { create(:taxonomy) }
-    let(:taxon) { create(:taxon) }
-    let(:product) { create(:product, taxons: [taxon]) }
-    let(:image) { create(:image) }
+    let(:taxon)    { create(:taxon) }
+    let(:product)  { create(:product, taxons: [taxon]) }
+    let(:image)    { create(:image) }
 
     before do
       product.images << image

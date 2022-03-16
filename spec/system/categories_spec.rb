@@ -1,22 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe "Categories", type: :system do
-  let(:taxonomy) { create(:taxonomy) }
-  let(:root) { taxonomy.root }
-  let(:taxon) { create(:taxon, taxonomy: taxonomy, parent: root, name: "taxon") }
-  let(:other_taxon) { create(:taxon, taxonomy: taxonomy, parent: root, name: "other_taxon") }
-  let(:product) { create(:product, taxons: [taxon]) }
+  let(:taxonomy)      { create(:taxonomy) }
+  let(:root)          { taxonomy.root }
+  let(:taxon)         { create(:taxon, taxonomy: taxonomy, parent: root, name: "taxon") }
+  let(:other_taxon)   { create(:taxon, taxonomy: taxonomy, parent: root, name: "other_taxon") }
+  let(:product)       { create(:product, taxons: [taxon]) }
   let(:other_product) { create(:product, taxons: [other_taxon], price: 15) }
-  let(:image) { create(:image) }
-  let(:other_image) { create(:image) }
+  let(:image)         { create(:image) }
+  let(:other_image)   { create(:image) }
 
   before do
-    product.images << image
+    product.images       << image
     other_product.images << other_image
     visit potepan_category_path(taxon.id)
   end
 
-  scenario 'サイドバーを操作し異なるカテゴリーページへ移動する' do
+  scenario 'サイドバーを操作して異なるカテゴリーページへ移動する' do
     click_on root.name
     within("ul.side-nav") do
       expect(page).to have_content taxon.name
@@ -28,7 +28,7 @@ RSpec.describe "Categories", type: :system do
     expect(current_path).to eq potepan_category_path(other_taxon.id)
   end
 
-  scenario "商品のリンクをクリックすると商品詳細ページへ移動する" do
+  scenario "商品をクリックしてその商品詳細ページへ移動する" do
     click_on product.name
     expect(current_path).to eq potepan_product_path(product.id)
   end

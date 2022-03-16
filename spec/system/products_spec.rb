@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Products", type: :system do
-  let(:taxon) { create(:taxon) }
+  let(:taxon)   { create(:taxon) }
   let(:product) { create(:product, taxons: [taxon]) }
-  let(:image) { create(:image) }
+  let(:image)   { create(:image) }
 
   before do
     product.images << image
