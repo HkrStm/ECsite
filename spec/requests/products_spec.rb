@@ -7,7 +7,7 @@ RSpec.describe "Products", type: :request do
     let(:related_product) { create(:product, taxons: [taxon]) }
     let(:image)           { create(:image) }
     let(:other_image)     { create(:image) }
-  
+
     before do
       product.images         << image
       related_product.images << other_image

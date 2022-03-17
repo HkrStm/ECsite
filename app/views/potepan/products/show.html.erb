@@ -67,15 +67,13 @@
         </div>
       </div>
     </div>
-
-<div class="row productsContent">
-  <div class="col-xs-12">
-    <div class="page-header">
-      <h4>関連商品</h4>
+    <div class="row productsContent">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>関連商品</h4>
+        </div>
+      </div>
+      <%= render partial: 'shared/product_box', collection: @related_products, as: 'product' %>
     </div>
-  </div>
-  <%= render partial: 'shared/product_box', collection: @related_products, as: 'product' %>
-</div>
-
   </div>
 </section>
