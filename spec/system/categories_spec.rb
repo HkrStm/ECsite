@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Categories", type: :system do
   let(:taxonomy)      { create(:taxonomy) }
-  let(:root)          { taxonomy.root }
-  let(:taxon)         { create(:taxon, taxonomy: taxonomy, parent: root, name: "taxon") }
-  let(:other_taxon)   { create(:taxon, taxonomy: taxonomy, parent: root, name: "other_taxon") }
+  let(:taxon)         { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root, name: "taxon") }
+  let(:other_taxon)   { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root, name: "other_taxon") }
   let(:product)       { create(:product, taxons: [taxon]) }
   let(:other_product) { create(:product, taxons: [other_taxon], price: 15) }
   let(:image)         { create(:image) }
@@ -17,7 +16,7 @@ RSpec.describe "Categories", type: :system do
   end
 
   scenario 'サイドバーを操作して異なるカテゴリーページへ移動する' do
-    click_on root.name
+    click_on taxonomy.root.name
     within("ul.side-nav") do
       expect(page).to have_content taxon.name
       expect(page).to have_content taxon.products.count

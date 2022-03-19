@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe "Products", type: :request do
   describe "#show" do
     let(:taxonomy)         { create(:taxonomy) }
-    let(:root)             { taxonomy.root }
-    let(:taxon)            { create(:taxon, taxonomy: taxonomy, parent: root) }
-    let(:other_taxon)      { create(:taxon, taxonomy: taxonomy, parent: root) }
-    let(:product)          { create(:product, taxons: [taxon], price: 11) }
-    let(:other_product)    { create(:product, taxons: [other_taxon], price: 15) }
+    let(:taxon)            { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+    let(:other_taxon)      { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+    let(:product)          { create(:product, taxons: [taxon]) }
+    let(:other_product)    { create(:product, taxons: [other_taxon]) }
     let(:related_products) { create_list(:product, 5, taxons: [taxon]) }
     let(:image)            { create(:image) }
 
@@ -30,15 +29,18 @@ RSpec.describe "Products", type: :request do
       expect(response.body).to include image.filename
     end
 
-    it "関連商品のデータを最大4つまで取得できていること" do
-      related_products[1..4].all? do |related_product|
-        expect(response.body).to include related_product.name
-      end
-      expect(response.body).not_to include related_products[0].name
-    end
-
     it "関連した商品以外のデータは取得されないこと" do
       expect(response.body).not_to include other_product.name
+    end
+
+    it "関連商品のデータを4つ取得できていること" do
+      related_products[0..3].all? do |related_product|
+        expect(response.body).to include related_product.name
+      end
+    end
+
+    it "関連商品のデータを5つ以上取得されないこと" do
+      expect(response.body).not_to include related_products[4].name
     end
   end
 end

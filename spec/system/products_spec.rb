@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Products", type: :system do
   let(:taxonomy)            { create(:taxonomy) }
-  let(:root)                { taxonomy.root }
-  let(:taxon)               { create(:taxon, taxonomy: taxonomy, parent: root) }
-  let(:other_taxon)         { create(:taxon, taxonomy: taxonomy, parent: root) }
+  let(:taxon)               { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+  let(:other_taxon)         { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
   let(:product)             { create(:product, taxons: [taxon], price: 11) }
   let(:other_product)       { create(:product, taxons: [other_taxon], price: 15) }
   let(:related_products)    { create_list(:product, 5, taxons: [taxon]) }
@@ -40,7 +39,7 @@ RSpec.describe "Products", type: :system do
     end
 
     it "関連商品が表示されること" do
-      related_products[1..4].all? do |related_product|
+      related_products[0..3].all? do |related_product|
         expect(page).to have_content related_product.name
         expect(page).to have_content related_product.display_price
       end
@@ -58,10 +57,14 @@ RSpec.describe "Products", type: :system do
       end
     end
 
-    it "関連商品が最大4つまで表示されること" do
+    it "関連商品が4つ表示されること" do
       within '.productsContent' do
         expect(page.all('.productBox').count).to eq 4
       end
+    end
+
+    it "関連商品が５つ以上表示されないこと" do
+      expect(page).not_to have_content related_products[4].name
     end
   end
 end
