@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "Products", type: :request do
   describe "#show" do
-    let(:taxonomy)         { create(:taxonomy) }
-    let(:taxon)            { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
-    let(:other_taxon)      { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
-    let(:product)          { create(:product, taxons: [taxon]) }
+    let(:taxonomy)          { create(:taxonomy) }
+    let(:taxon)             { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+    let(:other_taxon)       { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+    let(:product)           { create(:product, taxons: [taxon]) }
     let!(:other_product)    { create(:product, taxons: [other_taxon]) }
     let!(:related_products) { create_list(:product, 5, taxons: [taxon]) }
-    let(:image)            { create(:image) }
+    let(:image)             { create(:image) }
 
     before do
       product.images << image
