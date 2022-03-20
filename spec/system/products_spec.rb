@@ -5,7 +5,7 @@ RSpec.describe "Products", type: :system do
   let(:taxon)               { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
   let(:other_taxon)         { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
   let(:product)             { create(:product, taxons: [taxon], price: 11) }
-  let(:other_product)       { create(:product, taxons: [other_taxon], price: 15) }
+  let!(:other_product)      { create(:product, taxons: [other_taxon], price: 15) }
   let(:related_products)    { create_list(:product, 5, taxons: [taxon]) }
   let(:image)               { create(:image) }
   let(:other_product_image) { create(:image) }
