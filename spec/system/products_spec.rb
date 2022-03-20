@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "Products", type: :system do
   let(:taxonomy)            { create(:taxonomy) }
   let(:taxon)               { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
-  let(:other_taxon)         { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
+  let!(:other_taxon)        { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
   let(:product)             { create(:product, taxons: [taxon], price: 11) }
   let!(:other_product)      { create(:product, taxons: [other_taxon], price: 15) }
-  let(:related_products)    { create_list(:product, 5, taxons: [taxon]) }
+  let!(:related_products)   { create_list(:product, 5, taxons: [taxon]) }
   let(:image)               { create(:image) }
   let(:other_product_image) { create(:image) }
 
@@ -34,8 +34,8 @@ RSpec.describe "Products", type: :system do
 
   describe "関連商品" do
     scenario "関連商品をクリックしてその商品詳細ページへ移動する" do
-      click_on related_products[1].name
-      expect(current_path).to eq potepan_product_path(related_products[1].id)
+      click_on related_products[0].name
+      expect(current_path).to eq potepan_product_path(related_products[0].id)
     end
 
     it "関連商品が表示されること" do
@@ -64,7 +64,9 @@ RSpec.describe "Products", type: :system do
     end
 
     it "関連商品が５つ以上表示されないこと" do
-      expect(page).not_to have_content related_products[4].name
+      within '.productsContent' do
+        expect(page).not_to have_selector ".productBox", count: 5
+      end
     end
   end
 end

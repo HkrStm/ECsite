@@ -6,8 +6,8 @@ RSpec.describe "Products", type: :request do
     let(:taxon)            { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
     let(:other_taxon)      { create(:taxon, taxonomy: taxonomy, parent: taxonomy.root) }
     let(:product)          { create(:product, taxons: [taxon]) }
-    let(:other_product)    { create(:product, taxons: [other_taxon]) }
-    let(:related_products) { create_list(:product, 5, taxons: [taxon]) }
+    let!(:other_product)    { create(:product, taxons: [other_taxon]) }
+    let!(:related_products) { create_list(:product, 5, taxons: [taxon]) }
     let(:image)            { create(:image) }
 
     before do
@@ -36,6 +36,8 @@ RSpec.describe "Products", type: :request do
     it "関連商品のデータを4つ取得できていること" do
       related_products[0..3].all? do |related_product|
         expect(response.body).to include related_product.name
+        expect(response.body).to include related_product.display_price.to_s
+        related_product.images { |image| expect(response.body).to include image.attachment(:product) }
       end
     end
 
