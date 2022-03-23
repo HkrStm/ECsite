@@ -59,7 +59,7 @@ RSpec.describe "Products", type: :system do
 
     it "関連商品が4つ表示されること" do
       within '.productsContent' do
-        expect(page.all('.productBox').count).to eq 4
+        expect(page).to have_selector ".productBox", count: 4
       end
     end
 
